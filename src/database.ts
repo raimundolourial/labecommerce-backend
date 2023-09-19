@@ -2,14 +2,14 @@ import { products, users } from "./types";
 
 export const  tusers :users[]=[
     {
-        id: 1,
+        id: '1',
         name: 'junir',
         email: 'junior@email.com',
         password: '123456',
         createdAt : 'asdfg'
     },
     {
-        id: 2,
+        id: '2',
         name: 'fulano',
         email: 'fulano@email.com',
         password: '123456',
@@ -18,7 +18,7 @@ export const  tusers :users[]=[
 ]
 export const tprodutos :products[]=[
     {
-        id: 1,
+        id: '1',
         name: 'caixa',
         price: 10,
         description : 'caixa de som',
@@ -26,7 +26,7 @@ export const tprodutos :products[]=[
     },
 
     {
-        id: 2,
+        id: '2',
         name: 'mouse',
         price: 100,
         description : 'mouse optico',
@@ -34,7 +34,7 @@ export const tprodutos :products[]=[
     }
 ]
 
-export function createUser(id: number, name: string, email: string, password: string){
+export function createUser(id: string, name: string, email: string, password: string){
 const newUser : users = {
     id: id,
     name: name,
@@ -52,7 +52,7 @@ export function getAllUsers(){
 
 }
 
-export function createProduct(id: number, name: string, price: number, description: string, imageUrl:string){
+export function createProduct(id: string, name: string, price: number, description: string, imageUrl:string){
     const newProd : products = {
         id: id,
         name: name,

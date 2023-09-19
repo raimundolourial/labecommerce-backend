@@ -1,5 +1,5 @@
 export type users = {
-    id: number,
+    id: string,
     name: string,
     email: string,
     password: string,
@@ -7,7 +7,7 @@ export type users = {
     }
 
     export type products = {
-        id: number,
+        id: string,
         name: string,
         price: number,
         description : string,
