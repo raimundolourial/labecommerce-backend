@@ -17,12 +17,23 @@ app.get('/ping',(req:Request, res:Response)=>{
 })
 
 app.get('/users', (req:Request, res:Response)=>{
+    try{
     const result:users[] = tusers
     res.status(200).send(result)
+    }catch(error){
+        //res.send(error.message);
+    }
 })
 
 app.get('/products', (req:Request, res:Response)=>{
+    try{
     const query:string = req.query.q as string
+    
+    if(query && query.length<=0){
+        res.statusCode = 404;
+        throw new Error("A query tem q ter pelo menos um caractere");
+    }
+
     const productByName = tprodutos.filter(produto=>produto.name === query)
     if(productByName.length){
         res.status(200).send(productByName)
@@ -30,10 +41,19 @@ app.get('/products', (req:Request, res:Response)=>{
     const result:products[] = tprodutos
     res.status(200).send(result)
     }
+}catch(error){
+    res.send('aqui deu erro');
+}
 })
 
 app.post('/users',(req:Request, res:Response)=>{
+    try{
     const {id,name,email,password,createdAt}:users = req.body
+    const searchUser = tusers.find((user) => user.id === id)
+    const searchUserEmail = tusers.find((user) => user.email === email)
+    if(searchUser || searchUserEmail){
+    throw new Error("Id ou Email Ja Cadastrados. Por favor insira novos dados");
+    }
     const newUser:users={
         id,
         name,
@@ -44,10 +64,18 @@ app.post('/users',(req:Request, res:Response)=>{
 
     tusers.push(newUser)
     res.status(201).send('Usuario cadastrado com sucesso')
+}catch(error:any){
+    res.send(error.message)
+}
 })
 
 app.post('/products',(req:Request, res:Response)=>{
+    try{
     const {id,name,price,description,imageUrl}:products = req.body
+     const searchProdId = tprodutos.find((prod) => prod.id === id)
+     if(searchProdId){
+        throw new Error("Id  Ja Cadastrados. Por favor insira novos dados");
+     }
     const newProduct:products={
         id,
         name,
@@ -58,30 +86,58 @@ app.post('/products',(req:Request, res:Response)=>{
 
     tprodutos.push(newProduct)
     res.status(201).send('Produto cadastrado com sucesso')
+}catch(error){
+     if (error instanceof Error) {
+            res.send(error.message);
+        }
+}
 })
 
 app.delete('/users/:id',(req:Request, res:Response) =>{
+    try{
 const id = req.params.id
-
+const searchId = tusers.find((user)=>user.id===id)
+if(!searchId){
+    throw new Error("Usuario não encontrado")
+}
 const userDell = tusers.findIndex(user => user.id === id)
 if(userDell>=0){
 tusers.splice(userDell,1)
 }
 res.status(200).send('Usuario Deletado')
+}catch(error){
+    if(error instanceof Error){
+        res.send(error.message)
+    }
+}
 })
 
 app.delete('/products/:id',(req:Request, res:Response) =>{
+    try{
     const id = req.params.id
-    
+    const searchId = tprodutos.find((prod)=>prod.id===id)
+    if(!searchId){
+    throw new Error("Produto não encontrado")
+}
     const prodEdit = tprodutos.findIndex(prod => prod.id === id)
     if(prodEdit>=0){
     tprodutos.splice(prodEdit,1)
     }
     res.status(200).send('Produto Deletado')
+}catch(error){
+    if(error instanceof Error){
+        res.send(error.message)
+    }
+}
     })
 
     app.put('/products/:id', (req:Request, res:Response) =>{
+        try{
         const id = req.params.id
+        const searchId = tprodutos.find((prod)=>prod.id===id)
+        if(!searchId){
+            throw new Error("Produto não existe")
+        }
        const  newName = req.body.name as string | undefined
        const newPrice =req.body.price as number | undefined
        const newDescription = req.body.description as string | undefined
@@ -96,6 +152,11 @@ app.delete('/products/:id',(req:Request, res:Response) =>{
 
     console.log(prodEdit)
     res.status(200).send({mensagem:'o item foi Alterado com sucesso'})
+        }catch(error){
+            if(error instanceof Error){
+                res.send(error.message)
+            }
+        }
     })
 
 
