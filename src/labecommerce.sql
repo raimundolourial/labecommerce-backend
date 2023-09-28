@@ -30,3 +30,37 @@ INSERT INTO produtos(id, name,price, description, image_url) VALUES
 ('p003','Fritadeira Eletrica',190.0,'Frita na Ernegia','fffffffffafa'),
 ('p004','Papeiro',28.9,'papeiro vermelho','pppppvvvv'),
 ('p005','Panela Tampa de vidro',120.0,'panela de vidro','pvasdasd')
+
+--GET ALL USERS
+SELECT* FROM users
+
+--GET ALL PRODUCTS
+SELECT* FROM produtos
+
+--GET ALL PRODUCTS 2
+SELECT* FROM produtos where name LIKE '%gamer%'
+-- CREATE USER
+INSERT INTO users(id, name, email, password, creat_at) VALUES
+('u004','Wesley','wesley@email.com','12341','asdfdsgdfg')
+
+--CREATE PRODUCTS
+INSERT INTO produtos(id, name,price, description, image_url) VALUES
+('p006','panela gamer',177.0,'panela bronze gamer','llllllll')
+
+--DELETE USER BY ID
+DELETE FROM users
+WHERE id = 'u002';
+
+--DELETE PRODUTO BY ID
+DELETE FROM produtos
+WHERE id = 'p002';
+
+--Edit Product by id
+UPDATE produtos
+SET 
+id='p0022',
+name = 'Iphone 8',
+price = 1200.0,
+description = 'Iphone completo',
+image_url = 'sadsaf48484a63s'
+WHERE id = 'p001';
