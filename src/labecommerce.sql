@@ -64,3 +64,22 @@ price = 1200.0,
 description = 'Iphone completo',
 image_url = 'sadsaf48484a63s'
 WHERE id = 'p001';
+
+CREATE TABLE purchase(
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    buyer TEXT NOT NULL,
+    total_price REAL NOT NULL,
+    created_at TEXT NOT NULL,
+    FOREIGN KEY (buyer) REFERENCES users (id)
+    )
+
+    INSERT INTO purchase (id,buyer,total_price,created_at) VALUES ('p001','u001',122.50,'15/12/2015'),
+    ('p002','u003',22.50,'05/01/2014'),
+    ('p003','u003',99.50,'22/08/2023')
+
+    UPDATE purchase
+    SET 
+    total_price = 200.0
+    WHERE id = 'p003'
+
+    SELECT users.id,purchase.id,users.name,users.email, purchase.total_price, purchase.created_at FROM users INNER JOIN purchase ON users.id = purchase.buyer
