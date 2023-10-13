@@ -83,3 +83,67 @@ CREATE TABLE purchase(
     WHERE id = 'p003'
 
     SELECT users.id,purchase.id,users.name,users.email, purchase.total_price, purchase.created_at FROM users INNER JOIN purchase ON users.id = purchase.buyer
+
+
+    CREATE TABLE purchases_products(
+        purchase_id TEXT NOT NULL,
+        product_id TEXT NOT NULL,
+        quantity  INTEGER NOT NULL,
+        FOREIGN KEY (purchase_id) REFERENCES purchase(id)
+        FOREIGN KEY (product_id) REFERENCES producto(id)
+    ) 
+
+UPDATE purchase
+    SET 
+    id= 'pcs003'
+    WHERE id = 'p003'
+
+DROP TABLE purchases_products
+
+
+CREATE TABLE purchases_products(
+        purchase_id TEXT NOT NULL,
+        product_id TEXT NOT NULL,
+        quantity  INTEGER NOT NULL,
+        FOREIGN KEY (purchase_id) REFERENCES purchase(id)
+        FOREIGN KEY (product_id) REFERENCES produtos(id)
+    ) 
+
+
+    INSERT INTO purchases_products (purchase_id, product_id, quantity) VALUES
+    ('pcs001','p006',2),
+    ('pcs002','p0022',1),
+    ('pcs003','p005', 5)
+
+    SELECT * FROM produtos As p INNER JOIN purchases_products ON p.id = purchases_products.product_id RIGHT JOIN purchase ON purchase.id = purchases_products.purchase_id;
+
+
+    DROP TABLE purchases_products
+
+    DROP TABLE purchase
+
+    CREATE TABLE purchase(
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    buyer TEXT NOT NULL,
+    total_price REAL NOT NULL,
+    created_at TEXT NOT NULL,
+    FOREIGN KEY (buyer) REFERENCES users (id)
+    ON UPDATE CASCADE -- efeito cascata ao atualizar id na tabela users
+	ON DELETE CASCADE -- efeito cascata ao atualizar id na tabela users
+    )
+
+
+INSERT INTO purchase (id,buyer,total_price,created_at) VALUES ('p001','u001',122.50,'15/12/2015'),
+    ('p002','u003',22.50,'05/01/2014'),
+    ('p003','u003',99.50,'22/08/2023')
+
+
+CREATE TABLE purchases_products(
+        purchase_id TEXT NOT NULL,
+        product_id TEXT NOT NULL,
+        quantity  INTEGER NOT NULL,
+        FOREIGN KEY (purchase_id) REFERENCES purchase(id)
+        FOREIGN KEY (product_id) REFERENCES produtos(id)
+        ON UPDATE CASCADE -- efeito cascata ao atualizar id na tabela users
+	    ON DELETE CASCADE -- efeito cascata ao atualizar id na tabela users
+    ) 
