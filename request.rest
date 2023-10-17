@@ -1,0 +1,65 @@
+GET http://localhost:3003/ping
+###
+
+GET http://localhost:3003/users
+###
+
+GET http://localhost:3003/products
+###
+
+POST http://localhost:3003/users
+Content-Type: application/json
+
+{
+    "id": "u002",
+    "name": "Astrodev",
+    "email": "astrodev@email.com",
+    "password": "astrodev00",
+    "createdAt": "14/10/2023"
+}
+###
+
+POST  http://localhost:3003/products
+Content-Type: application/json
+
+{
+    "id": "prod001",
+    "name": "Teclado gamer",
+    "price": 200,
+    "description": "Teclado mecânico com numpad",
+    "imageUrl": "https://picsum.photos/seed/Teclado%20gamer/400"
+}
+###
+
+POST http://localhost:3003/purchases
+Content-Type: application/json
+
+{
+     "id": "pur001",
+    "buyer": "u001",
+    "products": [
+        {
+            "id": "p003",
+            "quantity": 2
+        },
+        {
+            "id": "p004",
+            "quantity": 1
+        }
+    ]
+}
+###
+
+PUT http://localhost:3003/products/p0022
+Content-Type: application/json
+
+{
+    "id": "prod0033",
+    "name": "Teclado gamer RGB",
+    "price": 300,
+    "description": "Teclado mecânico com RGB e numpad",
+    "imageUrl": "https://picsum.photos/seed/Teclado%20gamer%20RGB/400"
+}
+###
+DELETE http://localhost:3003/purchases/pur001
+###
