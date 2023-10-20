@@ -7,15 +7,18 @@ GET http://localhost:3003/users
 GET http://localhost:3003/products
 ###
 
+GET http://localhost:3003/purchase/pur001
+###
+
 POST http://localhost:3003/users
 Content-Type: application/json
 
 {
-    "id": "u002",
-    "name": "Astrodev",
-    "email": "astrodev@email.com",
-    "password": "astrodev00",
-    "createdAt": "14/10/2023"
+    "id": "u009",
+    "name": "9Astrodev9",
+    "email": "9astrodev9@email.com",
+    "password": "astro9999",
+    "createdAt": "17/10/2023"
 }
 ###
 
@@ -23,10 +26,10 @@ POST  http://localhost:3003/products
 Content-Type: application/json
 
 {
-    "id": "prod001",
-    "name": "Teclado gamer",
-    "price": 200,
-    "description": "Teclado mecânico com numpad",
+    "id": "prod002",
+    "name": "Cadeira gamer",
+    "price": 2000,
+    "description": "Cadeira confortavel para gamer",
     "imageUrl": "https://picsum.photos/seed/Teclado%20gamer/400"
 }
 ###
@@ -35,16 +38,16 @@ POST http://localhost:3003/purchases
 Content-Type: application/json
 
 {
-     "id": "pur001",
-    "buyer": "u001",
+     "id": "pur002",
+    "buyer": "u003",
     "products": [
         {
-            "id": "p003",
+            "id": "p005",
             "quantity": 2
         },
         {
-            "id": "p004",
-            "quantity": 1
+            "id": "p006",
+            "quantity": 3
         }
     ]
 }
